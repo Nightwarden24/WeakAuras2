@@ -145,13 +145,15 @@ for ($i = 0; $i -lt 3; $i++)
   {
     if ($null -ne $streamWriter)
     {
-      $streamWriter.Close()
+      $streamWriter.Dispose()
     }
   }
 
+  Test-Path "AtlasList_$($flavor[$i]).lua"
+
   Write-Host "Moving the file"
 
-  Move-Item -Path "./AtlasList_$($flavor[$i]).lua" -Destination "../../WeakAuras/" -Force
+  Move-Item -Path "AtlasList_$($flavor[$i]).lua" -Destination "../../WeakAuras/" -Force
 
   Write-Host "Cleaning up"
 
