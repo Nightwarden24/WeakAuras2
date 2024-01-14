@@ -10,7 +10,7 @@ Set-StrictMode -Version Latest
 #$ErrorActionPreference = "Stop"
 
 #If something is wrong, stop executing
-<# trap
+trap
 {
   Write-Host
   Write-Host "--- AN ERROR HAS OCCURRED ---"
@@ -27,7 +27,7 @@ Set-StrictMode -Version Latest
   Write-Host
 
   exit 1
-} #>
+}
 
 Write-Host "Starting it"
 
@@ -66,7 +66,7 @@ Class UiTextureAtlasElement
 [List[string]] $flavor = 'Retail', 'Wrath', 'ClassicEra'
 
 Write-Host ""
-Invoke-WebRequest -Uri "https://wago.tools/casc/listfile/download" -OutFile "UiTextureAtlas.csv"
+#Invoke-WebRequest -Uri "https://wago.tools/casc/listfile/download" -OutFile "UiTextureAtlas.csv"
 
 for ($i = 0; $i -lt 3; $i++)
 {
