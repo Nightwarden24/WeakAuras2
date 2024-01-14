@@ -5,16 +5,18 @@ on:
     - cron:  '55 0 * * *'
   push:
     branches:
-      - fake_branch
+      - test
+    paths:
+      - '**.md'
   workflow_dispatch:
-  
+
 jobs:
   AtlasUpdate:
     runs-on: ubuntu-latest
-    
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Create updated atlas list
         shell: pwsh
         run: |
