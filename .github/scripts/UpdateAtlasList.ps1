@@ -151,7 +151,7 @@ for ($i = 0; $i -lt 3; $i++)
 
   Write-Host "Moving the file"
 
-  Move-Item -Path "AtlasList_$($flavor[$i]).lua" -Destination "../../WeakAuras/" -Force
+  Move-Item -Path "./AtlasList_$($flavor[$i]).lua" -Destination "../../WeakAuras/" -Force
 
   Write-Host "Cleaning up"
 
