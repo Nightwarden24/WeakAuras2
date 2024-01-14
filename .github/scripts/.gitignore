@@ -1,3 +1,4 @@
 *.csv
 .wowtools.json
 atlas.lua
+AtlasList_*.lua
