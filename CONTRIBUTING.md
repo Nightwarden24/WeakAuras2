@@ -13,6 +13,7 @@ There are a few things which we require in any contribution:
 - When writing a new file, avoid using semicolons. When modifying code in an existing file, try to be consistent, but err on the side of no semicolons.
 - New features should be indicated by concatenating `WeakAuras.newFeatureString` onto the associated translation phrase. We will remove the new feature indicator approximately 3 months after the first release.
 
+125
 
 ## Pull Requests
 
