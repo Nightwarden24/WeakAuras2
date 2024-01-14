@@ -75,6 +75,9 @@ for ($i = 0; $i -lt 3; $i++)
   Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
   Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
 
+  Test-Path "UiTextureAtlas_$($flavor[$i]).csv"
+  Get-ItemProperty "UiTextureAtlas_$($flavor[$i]).csv" | Format-List
+
   Write-Host "Getting data from files"
 
   [List[UiTextureAtlas]] $tableA = Import-Csv -Path "UiTextureAtlas_$($flavor[$i]).csv" -Delimiter ',' -Encoding utf8
