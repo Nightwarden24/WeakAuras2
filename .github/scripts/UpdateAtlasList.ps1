@@ -125,7 +125,9 @@ for ($i = 0; $i -lt 3; $i++)
 
   try
   {
-    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
+
+    #[StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
+    [StreamWriter] $streamWriter = [StreamWriter]::new("$($PWD.Path)/AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
     $streamWriter.WriteLine("--- @type string, Private")
     $streamWriter.WriteLine("local AddonName, Private = ...")
     $streamWriter.WriteLine("")
