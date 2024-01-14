@@ -1,5 +1,6 @@
 <div align="center">
-
+  
+  
 # WeakAuras
 
 [![Build Status](https://github.com/WeakAuras/WeakAuras2/workflows/CI/badge.svg)](https://github.com/WeakAuras/WeakAuras2/actions?workflow=CI)
