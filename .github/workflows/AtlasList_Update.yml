@@ -1,7 +1,7 @@
 name: Create WeakAuras atlas list update pull request
 
 on:
-  pull_request:
+  push:
     branches:
       - fake_branch
   workflow_dispatch:
