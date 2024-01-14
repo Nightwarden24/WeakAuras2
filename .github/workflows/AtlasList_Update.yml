@@ -3,7 +3,7 @@ name: Create WeakAuras atlas list update pull request
 on:
   schedule:
     - cron:  '55 0 * * *'
-  push:
+  pull_request:
     branches:
       - fake_branch
   workflow_dispatch:
