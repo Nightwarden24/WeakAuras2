@@ -5,22 +5,29 @@ using namespace System.Text
 using namespace System.Collections.Generic
 
 Set-StrictMode -Version Latest
+
+#Github Actions prepends $ErrorActionPreference = 'stop' to script contents.
 #$ErrorActionPreference = "Stop"
 
 #If something is wrong, stop executing
-# trap
-# {
-#   Write-Host
-#   Write-Host "--- AN ERROR HAS OCCURRED ---"
-#   Write-Host "Type: $($_.Exception.GetType().Name)"
-#   Write-Host "Message: $($_.Exception.Message)"
-#   #Write-Host "Statement: $($_.InvocationInfo.Statement)"
-#   Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
-#   Write-Host "-----------------------------"
-#   Write-Host
+<# trap
+{
+  Write-Host
+  Write-Host "--- AN ERROR HAS OCCURRED ---"
+  Write-Host "Type: $($_.Exception.GetType().Name)"
+  Write-Host "Message: $($_.Exception.Message)"
+  #Write-Host "Statement: $($_.InvocationInfo.Statement)"
+  #Workaround
+  #Currently VM images for GitHub-hosted runners used for Actions contain PowerShell version 7.2
+  #It will be updated on January, 28
+  #Statement property of InvocationInfo is available since 7.4
+  Write-Host "Line: $($_.InvocationInfo.PositionMessage.Split([Environment]::NewLine)[1].TrimStart('+', ' '))"
+  Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
+  Write-Host "-----------------------------"
+  Write-Host
 
-#   exit 1
-# }
+  exit 1
+} #>
 
 Write-Host "Starting it"
 
@@ -59,6 +66,7 @@ Class UiTextureAtlasElement
 [List[string]] $flavor = 'Retail', 'Wrath', 'ClassicEra'
 
 Write-Host ""
+Invoke-WebRequest -HttpVersion 2.0 -Uri "https://wago.tools/casc/listfile/download" -OutFile "UiTextureAtlas.csv"
 
 for ($i = 0; $i -lt 3; $i++)
 {
@@ -164,4 +172,4 @@ for ($i = 0; $i -lt 3; $i++)
 }
 
 Write-Host "Task has been successfully completed!"
-# exit 0
+exit 0
