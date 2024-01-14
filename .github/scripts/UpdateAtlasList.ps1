@@ -71,12 +71,14 @@ for ($i = 0; $i -lt 3; $i++)
   Write-Host "Version: $($flavor[$i])"
   Write-Host "Downloading files"
 
-  Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
-  Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
-  Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
+  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
+  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
+  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
 
+  Write-Host "-----------"
   Test-Path "UiTextureAtlas_$($flavor[$i]).csv"
-  Get-ItemProperty "UiTextureAtlas_$($flavor[$i]).csv" | Format-List
+  (Get-ItemProperty "UiTextureAtlas_$($flavor[$i]).csv").FullName
+  Write-Host "-----------"
 
   Write-Host "Getting data from files"
 
@@ -143,8 +145,10 @@ for ($i = 0; $i -lt 3; $i++)
 
     $streamWriter.WriteLine("}")
 
+    Write-Host "||||||||||||"
     $streamWriter.BaseStream.Name
     Write-Host "$($streamWriter.BaseStream.Name)"
+    Write-Host "||||||||||||"
     $streamWriter.Close()
   }
   finally
@@ -155,9 +159,16 @@ for ($i = 0; $i -lt 3; $i++)
     }
   }
 
+  Write-Host "*****************"
+  $PWD
+  Get-Location
+  Write-Host "*****************"
+
+  Write-Host "#####"
   Write-Host "AtlasList_$($flavor[$i]).lua"
 
   Test-Path "AtlasList_$($flavor[$i]).lua"
+  Write-Host "####"
 
   Write-Host "Moving the file"
 
@@ -176,9 +187,9 @@ for ($i = 0; $i -lt 3; $i++)
   $result.Clear()
   $result.TrimExcess()
 
-  Remove-Item -Path "UiTextureAtlas_$($flavor[$i]).csv"
-  Remove-Item -Path "UiTextureAtlasMember_$($flavor[$i]).csv"
-  Remove-Item -Path "UiTextureAtlasElement_$($flavor[$i]).csv"
+  #Remove-Item -Path "UiTextureAtlas_$($flavor[$i]).csv"
+  #Remove-Item -Path "UiTextureAtlasMember_$($flavor[$i]).csv"
+  #Remove-Item -Path "UiTextureAtlasElement_$($flavor[$i]).csv"
 
   Write-Host "Done"
   Write-Host ""
