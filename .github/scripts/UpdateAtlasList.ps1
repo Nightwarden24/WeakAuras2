@@ -13,7 +13,7 @@ Set-StrictMode -Version Latest
 trap
 {
   Write-Host
-  Write-Host "---------- AN ERROR HAS OCCURRED ----------"
+  Write-Host "AN ERROR HAS OCCURRED"
   Write-Host "Type: $($_.Exception.GetType().Name)"
   Write-Host "Message: $($_.Exception.Message)"
   #Write-Host "Statement: $($_.InvocationInfo.Statement)"
@@ -23,7 +23,6 @@ trap
   #Statement property of InvocationInfo is available since 7.4
   Write-Host "Line: $($_.InvocationInfo.PositionMessage.Split([Environment]::NewLine)[1].TrimStart('+', ' '))"
   Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
-  Write-Host "-------------------------------------------"
   Write-Host
 
   exit 1
@@ -72,9 +71,9 @@ for ($i = 0; $i -lt 3; $i++)
   Write-Host "Version: $($flavor[$i])"
   Write-Host "Downloading files"
 
-  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
-  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
-  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
+  Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
+  Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
+  Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
 
   Write-Host "Getting data from files"
 
