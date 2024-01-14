@@ -66,16 +66,16 @@ Class UiTextureAtlasElement
 [List[string]] $flavor = 'Retail', 'Wrath', 'ClassicEra'
 
 Write-Host ""
-Invoke-WebRequest -HttpVersion 2.0 -Uri "https://wago.tools/casc/listfile/download" -OutFile "UiTextureAtlas.csv"
+Invoke-WebRequest -Uri "https://wago.tools/casc/listfile/download" -OutFile "UiTextureAtlas.csv"
 
 for ($i = 0; $i -lt 3; $i++)
 {
   Write-Host "Version: $($flavor[$i])"
   Write-Host "Downloading files"
 
-  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
-  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
-  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
+  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
+  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
+  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
 
   Write-Host "Getting data from files"
 
