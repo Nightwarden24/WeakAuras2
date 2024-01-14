@@ -116,11 +116,11 @@ for ($i = 0; $i -lt 3; $i++)
 
   [List[string]] $result = [Enumerable]::ToList($step4)
 
-  Write-Host "Writing result in the file"
+  Write-Host "Writing result in a file"
 
   try
   {
-    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasListUpdate_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
+    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
     $streamWriter.WriteLine("--- @type string, Private")
     $streamWriter.WriteLine("local AddonName, Private = ...")
     $streamWriter.WriteLine("")
@@ -147,6 +147,10 @@ for ($i = 0; $i -lt 3; $i++)
       $streamWriter.Dispose()
     }
   }
+
+  Write-Host "Moving the file"
+
+  Move-Item -Path "AtlasList_$($flavor[$i]).lua" -Destination "../../WeakAuras/" -Force
 
   Write-Host "Cleaning up"
 

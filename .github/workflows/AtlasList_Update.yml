@@ -22,3 +22,13 @@ jobs:
         run: |
           cd .github/scripts/
           ./UpdateAtlasList.ps1
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: update-atlaslist
+          delete-branch: true
+          commit-message: Update atlas list from wago.tools
+          title: Auto-update atlas list from wago.tools
+          add-paths: |
+            WeakAuras/AtlasList_*.lua
