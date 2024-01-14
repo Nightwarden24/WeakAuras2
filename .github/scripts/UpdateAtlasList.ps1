@@ -8,19 +8,19 @@ Set-StrictMode -Version Latest
 #$ErrorActionPreference = "Stop"
 
 #If something is wrong, stop executing
-trap
-{
-  # Write-Host
-  # Write-Host "AN ERROR HAS OCCURRED"
-  # Write-Host "Type: $($_.Exception.GetType().Name)"
-  # Write-Host "Message: $($_.Exception.Message)"
-  # #Write-Host "Statement: $($_.InvocationInfo.Statement)"
-  # Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
-  # Write-Host
+# trap
+# {
+#   Write-Host
+#   Write-Host "--- AN ERROR HAS OCCURRED ---"
+#   Write-Host "Type: $($_.Exception.GetType().Name)"
+#   Write-Host "Message: $($_.Exception.Message)"
+#   #Write-Host "Statement: $($_.InvocationInfo.Statement)"
+#   Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
+#   Write-Host "-----------------------------"
+#   Write-Host
 
-  Write-Host "::error file=$($_.InvocationInfo.ScriptName),line=$($_.InvocationInfo.ScriptLineNumber),col=$($_.InvocationInfo.OffsetInLine),title=AN ERROR HAS OCCURRED::Type: $($_.Exception.GetType().Name) Message: $($_.Exception.Message)"
-  exit 1
-}
+#   exit 1
+# }
 
 Write-Host "Starting it"
 
@@ -164,4 +164,4 @@ for ($i = 0; $i -lt 3; $i++)
 }
 
 Write-Host "Task has been successfully completed!"
-exit 0
+# exit 0

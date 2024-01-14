@@ -1,4 +1,4 @@
-name: Create WeakAuras atlas list update pull request
+name: Create PR to update atlas list
 
 on:
   #schedule:
