@@ -139,6 +139,9 @@ for ($i = 0; $i -lt 3; $i++)
     }
 
     $streamWriter.WriteLine("}")
+
+    $streamWriter.BaseStream.Name
+    Write-Host "$($streamWriter.BaseStream.Name)"
     $streamWriter.Close()
   }
   finally
@@ -148,6 +151,8 @@ for ($i = 0; $i -lt 3; $i++)
       $streamWriter.Dispose()
     }
   }
+
+  Write-Host "AtlasList_$($flavor[$i]).lua"
 
   Test-Path "AtlasList_$($flavor[$i]).lua"
 
