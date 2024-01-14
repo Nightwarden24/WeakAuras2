@@ -1,8 +1,8 @@
 name: Create WeakAuras atlas list update pull request
 
 on:
-  schedule:
-    - cron:  '55 0 * * *'
+  #schedule:
+  #  - cron:  '55 0 * * *'
   push:
     branches:
       - test
@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  AtlasUpdate:
+  AtlasListUpdate:
     runs-on: ubuntu-latest
 
     steps:
