@@ -10,13 +10,15 @@ Set-StrictMode -Version Latest
 #If something is wrong, stop executing
 trap
 {
-  Write-Host
-  Write-Host "AN ERROR HAS OCCURRED"
-  Write-Host "Type: $($_.Exception.GetType().Name)"
-  Write-Host "Message: $($_.Exception.Message)"
-  #Write-Host "Statement: $($_.InvocationInfo.Statement)"
-  Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
-  Write-Host
+  # Write-Host
+  # Write-Host "AN ERROR HAS OCCURRED"
+  # Write-Host "Type: $($_.Exception.GetType().Name)"
+  # Write-Host "Message: $($_.Exception.Message)"
+  # #Write-Host "Statement: $($_.InvocationInfo.Statement)"
+  # Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
+  # Write-Host
+
+  Write-Host "::error file=$($_.InvocationInfo.ScriptName),line=$($_.InvocationInfo.ScriptLineNumber),col=$($_.InvocationInfo.OffsetInLine),title=AN ERROR HAS OCCURRED::Type: $($_.Exception.GetType().Name) Message: $($_.Exception.Message)"
   exit 1
 }
 
@@ -56,9 +58,11 @@ Class UiTextureAtlasElement
 [List[string]] $branch = 'wow', 'wow_classic', 'wow_classic_era'
 [List[string]] $flavor = 'Retail', 'Wrath', 'ClassicEra'
 
+Write-Host ""
+
 for ($i = 0; $i -lt 3; $i++)
 {
-  Write-Host "::group::Game version: $($flavor[$i])"
+  Write-Host "Version: $($flavor[$i])"
   Write-Host "Downloading files"
 
   #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
@@ -156,8 +160,8 @@ for ($i = 0; $i -lt 3; $i++)
   #Remove-Item -Path "UiTextureAtlasElement_$($flavor[$i]).csv"
 
   Write-Host "Done"
-  Write-Host "::endgroup::"
+  Write-Host ""
 }
 
-Write-Host "Task has been successfully completed"
+Write-Host "Task has been successfully completed!"
 exit 0
