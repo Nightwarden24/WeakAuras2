@@ -145,7 +145,7 @@ for ($i = 0; $i -lt 3; $i++)
   {
     if ($null -ne $streamWriter)
     {
-      $streamWriter.Dispose()
+      $streamWriter.Close()
     }
   }
 
