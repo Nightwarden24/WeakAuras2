@@ -11,18 +11,16 @@ Set-StrictMode -Version Latest
 trap
 {
   Write-Host
-  Write-Host "An error has occurred" -ForegroundColor Red
-  Write-Host "Type: " -NoNewline -ForegroundColor Cyan
-  Write-Host $($_.Exception.GetType().Name)
-  Write-Host "Message: " -NoNewline -ForegroundColor Cyan
-  Write-Host $_.Exception.Message
-  Write-Host "Statement: " -NoNewline -ForegroundColor Cyan
-  Write-Host $_.InvocationInfo.Statement 
-  Write-Host "Location: " -NoNewline -ForegroundColor Cyan
-  Write-Host "$($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
+  Write-Host "AN ERROR HAS OCCURRED"
+  Write-Host "Type: $($_.Exception.GetType().Name)"
+  Write-Host "Message: $($_.Exception.Message)"
+  #Write-Host "Statement: $($_.InvocationInfo.Statement)"
+  Write-Host "Location: $($_.InvocationInfo.ScriptName):$($_.InvocationInfo.ScriptLineNumber):$($_.InvocationInfo.OffsetInLine)"
   Write-Host
   exit 1
 }
+
+Write-Host "Starting it"
 
 Class UiTextureAtlas
 {
@@ -60,11 +58,11 @@ Class UiTextureAtlasElement
 
 for ($i = 0; $i -lt 3; $i++)
 {
-  Write-Host "Starting it for $($flavor[$i])"
+  Write-Host "::group::Game version: $($flavor[$i])"
   Write-Host "Downloading files"
 
   #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlas/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlas_$($flavor[$i]).csv"
-  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv" 
+  #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasMember/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlasMember_$($flavor[$i]).csv"
   #Invoke-WebRequest -Uri "https://wago.tools/db2/UiTextureAtlasElement/csv?branch=$($branch[$i])" -HttpVersion 2.0 -OutFile "UiTextureAtlasElement_$($flavor[$i]).csv"
 
   Write-Host "Getting data from files"
@@ -107,7 +105,7 @@ for ($i = 0; $i -lt 3; $i++)
   [IOrderedEnumerable[string]] $step4 = [Enumerable]::OrderBy($step3, [Func[string, string]] { $args[0] }, [StringComparer]::Ordinal)
 
   [List[string]] $result = [Enumerable]::ToList($step4)
-  
+
   Write-Host "Writing result in the file"
 
   try
@@ -121,9 +119,9 @@ for ($i = 0; $i -lt 3; $i++)
 
     foreach ($item in $result)
     {
-      $streamWriter.Write("'$item'") 
+      $streamWriter.Write("'$item'")
       $commaCount -= 1
-      
+
       if ($commaCount -gt 0)
       {
         $streamWriter.Write(",")
@@ -156,9 +154,10 @@ for ($i = 0; $i -lt 3; $i++)
   #Remove-Item -Path "UiTextureAtlas_$($flavor[$i]).csv"
   #Remove-Item -Path "UiTextureAtlasMember_$($flavor[$i]).csv"
   #Remove-Item -Path "UiTextureAtlasElement_$($flavor[$i]).csv"
-  
+
   Write-Host "Done"
-  Write-Host
+  Write-Host "::endgroup::"
 }
 
+Write-Host "Task has been successfully completed"
 exit 0
