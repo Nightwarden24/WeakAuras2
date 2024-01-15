@@ -119,8 +119,8 @@ for ($i = 0; $i -lt 3; $i++)
   try
   {
     #Some strange behavior from .NET here. Or is it Github Action / Action Checkout trick? Anyway, use fullpath
-    #[StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
-    [StreamWriter] $streamWriter = [StreamWriter]::new("$($PWD.Path)/AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
+    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
+    #[StreamWriter] $streamWriter = [StreamWriter]::new("$($PWD.Path)/AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
     $streamWriter.WriteLine("if not WeakAuras.IsLibsOK() then return end")
     $streamWriter.WriteLine("--- @type string, Private")
     $streamWriter.WriteLine("local AddonName, Private = ...")
