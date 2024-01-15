@@ -64,6 +64,7 @@ Class UiTextureAtlasElement
 
 [List[string]] $branch = 'wow', 'wow_classic', 'wow_classic_era'
 [List[string]] $flavor = 'Retail', 'Wrath', 'ClassicEra'
+[List[string]] $filenameSuffix = 'Retail', 'Wrath', 'Vanilla'
 
 Write-Host ""
 
@@ -118,7 +119,7 @@ for ($i = 0; $i -lt 3; $i++)
 
   try
   {
-    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($flavor[$i]).lua", $false, [Encoding]::UTF8)
+    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($filenameSuffix[$i]).lua", $false, [Encoding]::UTF8)
     $streamWriter.WriteLine("if not WeakAuras.IsLibsOK() then return end")
     $streamWriter.WriteLine("--- @type string, Private")
     $streamWriter.WriteLine("local AddonName, Private = ...")
@@ -148,7 +149,7 @@ for ($i = 0; $i -lt 3; $i++)
   }
 
   Write-Host "Moving the file"
-  Move-Item -Path "AtlasList_$($flavor[$i]).lua" -Destination "../../WeakAuras/" -Force
+  Move-Item -Path "AtlasList_$($filenameSuffix[$i]).lua" -Destination "../../WeakAuras/" -Force
 
   Write-Host "Cleaning up"
   Clear-Variable -Name step1, step2, step3, step4, commaCount -Scope Script
