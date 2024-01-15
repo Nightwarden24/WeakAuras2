@@ -1,0 +1,35 @@
+name: Create PR to update atlas list 2
+
+on:
+  #schedule:
+  #  - cron:  '0 10 * * 1'
+  push:
+    branches:
+      - test
+    paths:
+      - '**.toc'
+  workflow_dispatch:
+
+jobs:
+  AtlasListUpdate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Update files
+        shell: pwsh
+        working-directory: ./.github/scripts
+        run: |
+          ./UpdateAtlasList2.ps1
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: update-atlaslist
+          delete-branch: true
+          commit-message: Update atlas list from wago.tools
+          title: Auto-update atlas list from wago.tools
+          add-paths: |
+            WeakAuras/Types_*.lua
