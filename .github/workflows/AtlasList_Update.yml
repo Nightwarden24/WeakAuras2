@@ -20,8 +20,8 @@ jobs:
 
       - name: Create updated files
         shell: pwsh
+        working-directory: ./.github/scripts
         run: |
-          cd .github/scripts/
           ./UpdateAtlasList.ps1
 
       - name: Create pull request
