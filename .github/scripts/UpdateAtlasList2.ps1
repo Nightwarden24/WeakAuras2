@@ -193,4 +193,9 @@ for ($i = 0; $i -lt 3; $i++)
 }
 
 Write-Host "Task has been successfully completed!"
+
+#Set an environment variable for next step of workflow
+#Comment out the line to debug script on your computer
+"current_date=$(Get-Date -Format "d MMMM")" | Out-File -FilePath $env:GITHUB_ENV -Append
+
 exit 0
