@@ -1,6 +1,6 @@
 <div align="center">
   
-00
+0000
 # WeakAuras
 
 100011145564567890000
