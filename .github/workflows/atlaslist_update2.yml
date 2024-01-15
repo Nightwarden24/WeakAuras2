@@ -30,6 +30,6 @@ jobs:
           branch: update-atlaslist
           delete-branch: true
           commit-message: Update atlas list from wago.tools
-          title: Auto-update atlas list from wago.tools
+          title: Auto-update atlas list from wago.tools 2
           add-paths: |
             WeakAuras/Types_*.lua
