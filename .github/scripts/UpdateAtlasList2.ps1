@@ -115,7 +115,7 @@ for ($i = 0; $i -lt 3; $i++)
   [IOrderedEnumerable[string]] $step4 = [Enumerable]::OrderBy($step3, [Func[string, string]] { $args[0] }, [StringComparer]::Ordinal)
   [List[string]] $result = [Enumerable]::ToList($step4)
 
-  Write-Host "Excluding textures that are not available to players"
+  Write-Host "Excluding textures that are not available"
 
   #One such group of textures is currently known - CGuy_*
   #Based on the file name (Interface/CameraGuy/CameraGuyAsset) we can assume that they are intended for commentator mode
