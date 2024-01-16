@@ -87,7 +87,7 @@ for ($i = 0; $i -lt 3; $i++)
 
   #Can't chain method calls. Nested calls -> It will be a mess. So, step by step
 
-  # Syntax Join method
+  # Join method syntax in C#
   #
   # IEnumerable<TResult> Join<TOuter,TInner,TKey,TResult>(
   #   IEnumerable<TOuter> outer,
@@ -114,6 +114,13 @@ for ($i = 0; $i -lt 3; $i++)
   [IEnumerable[string]] $step3 = [Enumerable]::Distinct($step2, [StringComparer]::Ordinal)
   [IOrderedEnumerable[string]] $step4 = [Enumerable]::OrderBy($step3, [Func[string, string]] { $args[0] }, [StringComparer]::Ordinal)
   [List[string]] $result = [Enumerable]::ToList($step4)
+
+  Write-Host "Excluding textures that are not available to players"
+
+  #One such group of textures is currently known - CGuy_*
+  #Based on the file name (Interface/CameraGuy/CameraGuyAsset) we can assume that they are intended for commentator mode
+  #Listfile of the current build is required for the others
+  $result.RemoveAll([Predicate[string]] { param($x) $x.Contains("CGuy_") }) | Out-Null
 
   Write-Host "Writing result to file"
 
