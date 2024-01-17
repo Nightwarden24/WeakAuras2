@@ -126,7 +126,12 @@ for ($i = 0; $i -lt 3; $i++)
 
   try
   {
-    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($filenameSuffix[$i]).lua", $false, [Encoding]::UTF8)
+    #Don't write BOM when creating file (https://en.wikipedia.org/wiki/Byte_order_mark)
+    #In the line below:
+    #the 1st param - encoder should emit UTF8 identifier
+    #the 2nd param - throw an exception on invalid bytes
+    [UTF8Encoding] $UTF8NoBOM = [UTF8Encoding]::new($false, $true)
+    [StreamWriter] $streamWriter = [StreamWriter]::new("AtlasList_$($filenameSuffix[$i]).lua", $false, $UTF8NoBOM)
     $streamWriter.WriteLine("if not WeakAuras.IsLibsOK() then return end")
     $streamWriter.WriteLine("--- @type string, Private")
     $streamWriter.WriteLine("local AddonName, Private = ...")
@@ -159,7 +164,7 @@ for ($i = 0; $i -lt 3; $i++)
   Move-Item -Path "AtlasList_$($filenameSuffix[$i]).lua" -Destination "../../WeakAuras/" -Force
 
   Write-Host "Cleaning up"
-  Clear-Variable -Name step1, step2, step3, step4, commaCount -Scope Script
+  Clear-Variable -Name step1, step2, step3, step4, UTF8NoBOM, commaCount -Scope Script
 
   $tableA.Clear()
   $tableA.TrimExcess()

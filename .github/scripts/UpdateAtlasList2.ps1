@@ -127,8 +127,13 @@ for ($i = 0; $i -lt 3; $i++)
   [bool] $isLineFound = $false
   try
   {
+    #Don't write BOM when creating file (https://en.wikipedia.org/wiki/Byte_order_mark)
+    #In the line below:
+    #the 1st param - encoder should emit UTF8 identifier
+    #the 2nd param - throw an exception on invalid bytes
+    [UTF8Encoding] $UTF8NoBOM = [UTF8Encoding]::new($false, $true)
+    [StreamWriter] $streamWriter = [StreamWriter]::new("Types_$($filenameSuffix[$i]).lua", $false, $UTF8NoBOM)
     [StreamReader] $streamReader = [StreamReader]::new("../../WeakAuras/Types_$($filenameSuffix[$i]).lua", [Encoding]::UTF8)
-    [StreamWriter] $streamWriter = [StreamWriter]::new("Types_$($filenameSuffix[$i]).lua", $false, [Encoding]::UTF8)
 
     while ($streamReader.Peek() -gt -1)
     {
@@ -180,7 +185,7 @@ for ($i = 0; $i -lt 3; $i++)
   Move-Item -Path "Types_$($filenameSuffix[$i]).lua" -Destination "../../WeakAuras/" -Force
 
   Write-Host "Cleaning up"
-  Clear-Variable -Name step1, step2, step3, step4, line, commaCount -Scope Script
+  Clear-Variable -Name step1, step2, step3, step4, UTF8NoBOM, line, commaCount -Scope Script
 
   $tableA.Clear()
   $tableA.TrimExcess()
