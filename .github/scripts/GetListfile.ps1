@@ -50,7 +50,7 @@ Set-Location -Path "CascLib/CascLib"
 
 Write-Host "Building the library and its dependencies. Dotnet output:"
 Write-Host ""
-dotnet publish CascLib.csproj --configuration Release --framework net8.0
+dotnet publish CascLib.csproj --configuration Release --framework net7.0
 Write-Host ""
 
 Write-Host "Сonfiguring CascLib"
