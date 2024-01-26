@@ -57,7 +57,7 @@ Write-Host "Сonfiguring CascLib"
 
 if (-not (Test-Path "../../../*.dll" -PathType Leaf))
 {
-  Move-Item -Path "bin/Release/net8.0/publish/*.dll" -Destination "../../../" -Force
+  Move-Item -Path "bin/Release/net7.0/publish/*.dll" -Destination "../../../" -Force
 }
 Set-Location -Path "../../"
 
