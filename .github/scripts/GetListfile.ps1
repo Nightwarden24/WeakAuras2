@@ -74,8 +74,11 @@ Set-Location -Path "../../"
 #Add-Type -Path "../CascLib.dll"
 #Add-Type -Path "../MimeKitLite.dll"
 
-Import-Module -Name "../publish/CascLib.dll" -Scope Local
-Import-Module -Name "../publish/MimeKitLite.dll" -Scope Local
+Add-Type -Path "../publish/CascLib.dll"
+Add-Type -Path "../publish/MimeKitLite.dll"
+
+#Import-Module -Name "../publish/CascLib.dll" -Scope Local
+#Import-Module -Name "../publish/MimeKitLite.dll" -Scope Local
 
 #Import-Module -Name "../CascLib.dll" -Scope Local
 #Import-Module -Name "../MimeKitLite.dll" -Scope Local
@@ -164,8 +167,8 @@ foreach ($branch in $branches)
 
 Write-Host "Cleaning up"
 
-Remove-Module -Name "CascLib"
-Remove-Module -Name "MimeKitLite"
+#Remove-Module -Name "CascLib"
+#Remove-Module -Name "MimeKitLite"
 
 Set-Location -Path "../"
 Remove-Item -Path "Temp" -Recurse -Force
