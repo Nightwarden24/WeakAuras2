@@ -11,7 +11,7 @@ $PSNativeCommandUseErrorActionPreference = $true
 
 #If something is wrong, output info and stop executing
 #(printing colored text doesn't work for Github Actions)
-trap
+<# trap
 {
   Write-Host
   Write-Host "| AN ERROR HAS OCCURRED"
@@ -27,7 +27,7 @@ trap
   Write-Host
 
   exit 1
-}
+} #>
 
 Write-Host "Starting it"
 Write-Host ""
@@ -50,19 +50,21 @@ Set-Location -Path "CascLib/CascLib"
 
 Write-Host "Building the library and its dependencies. Dotnet output:"
 Write-Host ""
-dotnet publish CascLib.csproj --configuration Release --framework net7.0
+dotnet publish CascLib.csproj --configuration Release --framework net8.0
 Write-Host ""
 
 Write-Host "Сonfiguring CascLib"
 
 if (-not (Test-Path "../../../*.dll" -PathType Leaf))
 {
-  Move-Item -Path "bin/Release/net7.0/publish/*.dll" -Destination "../../../" -Force
+  Move-Item -Path "bin/Release/net8.0/publish/*.dll" -Destination "../../../" -Force
 }
 Set-Location -Path "../../"
 
-Import-Module -Name "../CascLib.dll" -Scope Local
-Import-Module -Name "../MimeKitLite.dll" -Scope Local
+Add-Type -Path "../CascLib.dll"
+Add-Type -Path "../MimeKitLite.dll"
+# Import-Module -Name "../CascLib.dll" -Scope Local
+# Import-Module -Name "../MimeKitLite.dll" -Scope Local
 
 $source = @"
 using CASCLib;
@@ -147,8 +149,8 @@ foreach ($branch in $branches)
 
 Write-Host "Cleaning up"
 
-Remove-Module -Name "CascLib"
-Remove-Module -Name "MimeKitLite"
+# Remove-Module -Name "CascLib"
+# Remove-Module -Name "MimeKitLite"
 
 Set-Location -Path "../"
 Remove-Item -Path "Temp" -Recurse -Force
